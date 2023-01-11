@@ -4,7 +4,7 @@ import "./PasswordGenerator.css";
 import Slider from "./Slider/Slider";
 
 function PasswordGenerator(props) {
-    const [password, setPassword] = useState("P4$5W0rD!");
+    const [password, setPassword] = useState("");
     const [length, setLength] = useState(4);
     let allowedCharacters = "";
 
@@ -46,8 +46,8 @@ function PasswordGenerator(props) {
 
     return (
 		
-        <div className="main-container">
-			
+        // <div className="main-container">
+		<>
             <div className="slider-container">
 				<label >Character Length</label>
 				<div> {length} </div>
@@ -96,7 +96,7 @@ function PasswordGenerator(props) {
 				GENERATE
 				</button>
 			</div>
-        </div>
+        </>
     );
 }
 

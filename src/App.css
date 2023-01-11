@@ -1,18 +1,92 @@
 .App {
-	display: flex;
+	/* background-color: #1E1E1E; */
+	color: #7E7C89;
+	background-color: burlywood;
+	padding-top: 30px;
+	display: block;
 	flex-direction: column;
 	align-items: center;
-	background-color: #1E1E1E;
+	/* background-color: #1E1E1E; */
 	height: 100vh;
 	color: #7E7C89;
 }
 
+.main-wrapper {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+.main-title {
+	width: 480px;
+	height: 40px;
+	margin: auto;
+	color: #7E7C89;
+	font-weight: 700;
+	text-align: center;
+}
 .password-box-container {
-	/* margin: auto;
-	align-self: center; */
 	width: 480px;
 	height: 70px;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
 	background-color: #2a2930;
 	color: white;
 	
+}
+
+.password-box {
+	padding: 20px 25px;
+	color:#7E7C89;
+	font-size: 22px;
+	font-weight: 500;
+	letter-spacing: 3px;
+}
+
+.clipboard {
+	margin-top: 25px;
+	margin-right: 25px;
+	height: fit-content;
+}
+
+.clipboard-image {
+	width: 20px;
+	height: 20px;
+	fill: none;
+}
+
+.second-container {
+	height: 469px;
+	width: 480px;
+	margin: auto;
+	margin-top: 20px;
+	background-color: #2a2930;
+	padding-top: 10px;
+	color: white;
+}
+
+.character-size-box {
+	padding: 20px 25px;
+	font-size: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.length-box {
+	font-size: 26px;
+	color: #a4ffaf;
+}
+
+.slider-box {
+	padding: 20px 25px;
+}
+
+.strength-box {
+	height: 63px;
+	width: 400px;
+	background-color: #7E7C89;
+	margin-left: 25px;
+	display: flex;
+	justify-content: space-between;
+	padding: 0px 15px;
 }
