@@ -1,9 +1,12 @@
-import { useState } from "react";
+// import { useState } from "react";
 import ReactSlider from "react-slider";
 import "./Slider.css";
 
 function Slider({value, handleChange}) {
 
+    function handleChange(event) {
+        // setLength(event.target.value);
+    }
     return (
         <>
         

@@ -1,23 +1,25 @@
-import React, { useState } from "react";
-import "./PasswordGenerator.css";
+import React from "react";
+import "./PasswordBox.css";
+import { toast } from 'react-toastify';
 
 function PasswordBox(props) {
-    const [password, setPassword] = useState("xyz");
-    // console.log(password);
-    const background = `./images/copyclipboard.svg`;
+    const password = props.password;
+
+    function handlePasswordCopy() {
+        navigator.clipboard.writeText(password);
+        props.handleCopy();
+    }
 
     return (
-        // <div className="password-box-container">
         <>
-        <input
-                type="text"
-                value={password}
-                onChange={(e) => { setPassword(e.target.value) }}
-            />
-            <span><i style={{ backgroundImage: `url(${background})`}} className="clipboard" > </i></span>
+            {/* <div className="password-text"> {password} </div> */}
+            <div className="password-box">
+                <div className="password-text"> {password} </div>
+            </div>
+            <div className="clipboard">
+                <button className="clipboard-image" onClick={handlePasswordCopy}></button>
+            </div>
         </>
-        
-        // </div>
     );
 }
 
