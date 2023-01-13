@@ -1,9 +1,6 @@
 .App {
-	/* background-color: #1E1E1E; */
-	/* color: #7E7C89; */
-	/* background-color: burlywood; */
 	padding-top: 30px;
-	display: block;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background-color: #1E1E1E;

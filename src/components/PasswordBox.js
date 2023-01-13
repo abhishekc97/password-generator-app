@@ -1,6 +1,5 @@
 import React from "react";
 import "./PasswordBox.css";
-import { toast } from 'react-toastify';
 
 function PasswordBox(props) {
     const password = props.password;
@@ -12,7 +11,6 @@ function PasswordBox(props) {
 
     return (
         <>
-            {/* <div className="password-text"> {password} </div> */}
             <div className="password-box">
                 <div className="password-text"> {password} </div>
             </div>

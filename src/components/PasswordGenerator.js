@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import PasswordBox from "./PasswordBox"; 
+import PasswordBox from "./PasswordBox";
 import "./PasswordGenerator.css";
-// import Slider from "./Slider/Slider";
 import ReactSlider from "react-slider";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 function PasswordGenerator(props) {
     const [password, setPassword] = useState("P4$5W0rD!");
@@ -21,9 +20,9 @@ function PasswordGenerator(props) {
     if (special) allowedCharacters += "!@#$%^&*()-=_?";
 
     const [recents, setRecents] = useState({
-        recent1:"",
+        recent1: "",
         recent2: "",
-        recent3: ""
+        recent3: "",
     });
 
     function generatePassword(length) {
@@ -34,28 +33,29 @@ function PasswordGenerator(props) {
                 Math.floor(Math.random() * allowedCharacters.length)
             );
         }
+
+        // console.log(newPassword);
         setPassword(newPassword);
-        
-        if(password && password !== "P4$5W0rD!") {
+
+        if (password && password !== "P4$5W0rD!") {
             setRecents({
-                recent3:recents.recent2,
-                recent2:recents.recent1,
-                recent1:password
+                recent1: password,
+                recent2: recents.recent1,
+                recent3: recents.recent2,
             });
         }
-        
     }
 
     function handleSubmit() {
-        if(!uppercase && !lowercase && !numbers && !special) {
+        if (!uppercase && !lowercase && !numbers && !special) {
             alert("Select at least one condition");
-        } else if(length < 4) {
+        } else if (length < 4) {
             alert("password must contain atleast 4 characters");
         } else {
             generatePassword(length);
         }
-        
-        console.log(password);
+
+        // console.log(password);
         props.setData(password);
     }
 
@@ -64,14 +64,16 @@ function PasswordGenerator(props) {
     }
 
     function handleCopy() {
-        toast.success("Copied");
+        // toast.success("Copied");
+        props.toastalert();
+
         // navigator.clipboard.writeText(password);
         // notify();
     }
 
-    const notify = () => toast("Copied!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-    });
+    // const notify = () => toast("Copied!", {
+    //     position: toast.POSITION.BOTTOM_RIGHT,
+    // });
 
     useEffect(() => {
         console.log(
@@ -105,7 +107,6 @@ function PasswordGenerator(props) {
                         onChange={(val) => handleChange(val)}
                     />
                 </div>
-                {/* <Slider   /> */}
                 <div className="check-buttons-container">
                     <label className="container">
                         Include Uppercase letters
@@ -151,13 +152,32 @@ function PasswordGenerator(props) {
                 <div className="strength-box">
                     <div className="strength-text">STRENGTH</div>
                     <div className="strength-bars">
-                        <div className="strength-bar"></div>
-                        <div className="strength-bar"></div>
-                        <div className="strength-bar"></div>
-                        <div className="strength-bar"></div>
+                        <div
+                            className="strength-bar"
+                            style={{
+                                backgroundColor: uppercase ? "#a4ffaf" : "",
+                            }}
+                        ></div>
+                        <div
+                            className="strength-bar"
+                            style={{
+                                backgroundColor: lowercase ? "#a4ffaf" : "",
+                            }}
+                        ></div>
+                        <div
+                            className="strength-bar"
+                            style={{
+                                backgroundColor: numbers ? "#a4ffaf" : "",
+                            }}
+                        ></div>
+                        <div
+                            className="strength-bar"
+                            style={{
+                                backgroundColor: special ? "#a4ffaf" : "",
+                            }}
+                        ></div>
                     </div>
                 </div>
-                {/* onChange={(e) => setLength(e)} value={length} handleChange={handleChange}*/}
                 <div className="generate-button-container">
                     <button
                         className="submit-button"
@@ -166,22 +186,28 @@ function PasswordGenerator(props) {
                         GENERATE
                     </button>
                 </div>
-                
             </div>
-            <ToastContainer position="top-center" icon={false} autoClose={1000} closeOnClick pauseOnFocusLoss pauseOnHover theme="dark" />
+            {/* <ToastContainer position="top-center" icon={false} draggablePercent={60} autoClose={1000} closeOnClick pauseOnFocusLoss pauseOnHover theme="dark" /> */}
             <div>
                 <div className="password-box-container">
-                    <PasswordBox password={recents.recent1} handleCopy={handleCopy} />
+                    <PasswordBox
+                        password={recents.recent1}
+                        handleCopy={handleCopy}
+                    />
                 </div>
                 <div className="password-box-container">
-                    <PasswordBox password={recents.recent2} handleCopy={handleCopy} />
+                    <PasswordBox
+                        password={recents.recent2}
+                        handleCopy={handleCopy}
+                    />
                 </div>
                 <div className="password-box-container">
-                    <PasswordBox password={recents.recent3} handleCopy={handleCopy} />
+                    <PasswordBox
+                        password={recents.recent3}
+                        handleCopy={handleCopy}
+                    />
                 </div>
             </div>
-            
-            
         </>
     );
 }

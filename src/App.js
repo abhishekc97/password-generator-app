@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import PasswordBox from "./components/PasswordBox";
 import PasswordGenerator from "./components/PasswordGenerator";
-// import Slider from "./components/Slider/Slider";
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
     const title = "Password Generator";
     const [passwordData, setPasswordData] = useState();
-	console.log(passwordData);
+	// console.log(passwordData);
     useEffect(() => {
-        console.log(passwordData);
+        // console.log(passwordData);
     }, [passwordData]);
+
+	function toastalert() {
+        toast.success("Copied");
+    }
 
     return (
         <div>
@@ -19,11 +22,13 @@ function App() {
 					<div>
 						<div className="main-title"> {title} </div>
 						<>
-						<PasswordGenerator setData={setPasswordData} />
+						<PasswordGenerator setData={setPasswordData} toastalert={toastalert} />
 						</>
 					</div>
                     
                 </div>
+				<ToastContainer position="top-center" icon={false} draggablePercent={60} autoClose={1000} closeOnClick pauseOnFocusLoss pauseOnHover theme="dark" />
+
             </div>
         </div>
     );
