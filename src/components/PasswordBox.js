@@ -4,7 +4,7 @@ import styles from "./PasswordBox.module.css";
 function PasswordBox(props) {
     const password = props.password;
 
-    function handlePasswordCopy() {
+    function handleCopyPassword() {
         navigator.clipboard.writeText(password);
         props.handleCopy();
     }
@@ -17,7 +17,7 @@ function PasswordBox(props) {
             <div className={styles.clipboard}>
                 <button
                     className={styles.clipboardImage}
-                    onClick={handlePasswordCopy}
+                    onClick={handleCopyPassword}
                 ></button>
             </div>
         </>
