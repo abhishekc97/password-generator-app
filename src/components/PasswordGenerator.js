@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PasswordBox from "./PasswordBox";
-import "./PasswordGenerator.css";
+import styles from "./PasswordGenerator.module.css";
 import ReactSlider from "react-slider";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 function PasswordGenerator(props) {
     const [password, setPassword] = useState("P4$5W0rD!");
@@ -27,16 +28,12 @@ function PasswordGenerator(props) {
 
     function generatePassword(length) {
         let newPassword = "";
-
         for (var i = 0; i < length; i++) {
             newPassword += allowedCharacters.charAt(
                 Math.floor(Math.random() * allowedCharacters.length)
             );
         }
-
-        // console.log(newPassword);
         setPassword(newPassword);
-
         if (password && password !== "P4$5W0rD!") {
             setRecents({
                 recent1: password,
@@ -50,12 +47,10 @@ function PasswordGenerator(props) {
         if (!uppercase && !lowercase && !numbers && !special) {
             alert("Select at least one condition");
         } else if (length < 4) {
-            alert("password must contain atleast 4 characters");
+            alert("Password must contain atleast 4 characters");
         } else {
             generatePassword(length);
         }
-
-        // console.log(password);
         props.setData(password);
     }
 
@@ -63,152 +58,134 @@ function PasswordGenerator(props) {
         setLength(val);
     }
 
-    function handleCopy() {
-        // toast.success("Copied");
+    function handleCopyToast() {
         props.toastalert();
-
-        // navigator.clipboard.writeText(password);
-        // notify();
     }
 
-    // const notify = () => toast("Copied!", {
-    //     position: toast.POSITION.BOTTOM_RIGHT,
-    // });
-
-    useEffect(() => {
-        console.log(
-            "uppercase, lowercase, numbers, special: ",
-            uppercase,
-            lowercase,
-            numbers,
-            special
-        );
-    }, [uppercase, lowercase, numbers, special]);
+    useEffect(() => {}, [uppercase, lowercase, numbers, special]);
 
     return (
-        <>
-            <div className="password-box-container">
-                <PasswordBox password={password} handleCopy={handleCopy} />
-            </div>
-            <div className="second-container">
-                <div className="character-size-box">
-                    <div>Character length</div>
-                    <div className="length-box">{length}</div>
-                </div>
-                <div className="slider-box">
-                    <ReactSlider
-                        className="horizontal-slider"
-                        thumbClassName="example-thumb"
-                        trackClassName="example-track"
-                        min={0}
-                        max={15}
-                        defaultValue={4}
-                        value={length}
-                        onChange={(val) => handleChange(val)}
+        <div className={styles.mainWrapper}>
+            <div className={styles.left}>
+                <div className={styles.passwordBoxContainer}>
+                    <PasswordBox
+                        password={password}
+                        handleCopy={handleCopyToast}
                     />
                 </div>
-                <div className="check-buttons-container">
-                    <label className="container">
-                        Include Uppercase letters
-                        <input
-                            type="checkbox"
-                            checked={uppercase}
-                            onChange={() => setUppercase(!uppercase)}
-                            label="Include Uppercase letters"
-                        />
-                        <span className="checkmark"></span>
-                    </label>
-                    <label className="container">
-                        Include Lowercase letters
-                        <input
-                            type="checkbox"
-                            checked={lowercase}
-                            onChange={() => setLowercase(!lowercase)}
-                            label="Include lowercase letters"
-                        />
-                        <span className="checkmark"></span>
-                    </label>
-                    <label className="container">
-                        Include Numbers
-                        <input
-                            type="checkbox"
-                            checked={numbers}
-                            onChange={() => setNumbers(!numbers)}
-                            label="Include Numbers"
-                        />
-                        <span className="checkmark"></span>
-                    </label>
-                    <label className="container">
-                        Include Special characters
-                        <input
-                            type="checkbox"
-                            checked={special}
-                            onChange={() => setSpecial(!special)}
-                            label="Include Special characters"
-                        />
-                        <span className="checkmark"></span>
-                    </label>
-                </div>
-                <div className="strength-box">
-                    <div className="strength-text">STRENGTH</div>
-                    <div className="strength-bars">
-                        <div
-                            className="strength-bar"
-                            style={{
-                                backgroundColor: uppercase ? "#a4ffaf" : "",
-                            }}
-                        ></div>
-                        <div
-                            className="strength-bar"
-                            style={{
-                                backgroundColor: lowercase ? "#a4ffaf" : "",
-                            }}
-                        ></div>
-                        <div
-                            className="strength-bar"
-                            style={{
-                                backgroundColor: numbers ? "#a4ffaf" : "",
-                            }}
-                        ></div>
-                        <div
-                            className="strength-bar"
-                            style={{
-                                backgroundColor: special ? "#a4ffaf" : "",
-                            }}
-                        ></div>
+                <div className={styles.bottom}>
+                    <div className={styles.characterSizeBox}>
+                        <div>Character length</div>
+                        <div className={styles.lengthBox}>{length}</div>
                     </div>
-                </div>
-                <div className="generate-button-container">
+                    <div className={styles.sliderBox}>
+                        <ReactSlider
+                            className={styles.horizontalSlider}
+                            thumbClassName={styles.exampleThumb}
+                            trackClassName={styles.exampletrack}
+                            min={0}
+                            max={15}
+                            defaultValue={4}
+                            value={length}
+                            onChange={(val) => handleChange(val)}
+                        />
+                    </div>
+                    <div className={styles.checkButtonsContainer}>
+                        <label className={styles.container}>
+                            Include Uppercase letters
+                            <input
+                                type="checkbox"
+                                name="uppercase"
+                                id="uppercase"
+                                checked={uppercase}
+                                onChange={() => setUppercase(!uppercase)}
+                            />
+                            <span className={styles.checkmark}></span>
+                        </label>
+                        <label className={styles.container}>
+                            Include Lowercase letters
+                            <input
+                                type="checkbox"
+                                checked={lowercase}
+                                onChange={() => setLowercase(!lowercase)}
+                            />
+                            <span className={styles.checkmark}></span>
+                        </label>
+                        <label className={styles.container}>
+                            Include Numbers
+                            <input
+                                type="checkbox"
+                                checked={numbers}
+                                onChange={() => setNumbers(!numbers)}
+                            />
+                            <span className={styles.checkmark}></span>
+                        </label>
+                        <label className={styles.container}>
+                            Include Special characters
+                            <input
+                                type="checkbox"
+                                checked={special}
+                                onChange={() => setSpecial(!special)}
+                            />
+                            <span className={styles.checkmark}></span>
+                        </label>
+                    </div>
+                    <div className={styles.strengthBox}>
+                        <div className={styles.strengthText}>STRENGTH</div>
+                        <div className={styles.strengthBars}>
+                            <div
+                                className={
+                                    uppercase
+                                        ? `${styles.strengthBar} ${styles.selectedOption}`
+                                        : `${styles.strengthBar} ${styles.unselectedOption}`
+                                }
+                            ></div>
+                            <div
+                                className={
+                                    lowercase
+                                        ? `${styles.strengthBar} ${styles.selectedOption}`
+                                        : `${styles.strengthBar} ${styles.unselectedOption}`
+                                }
+                            ></div>
+                            <div
+                                className={
+                                    numbers
+                                        ? `${styles.strengthBar} ${styles.selectedOption}`
+                                        : `${styles.strengthBar} ${styles.unselectedOption}`
+                                }
+                            ></div>
+                            <div
+                                className={
+                                    special
+                                        ? `${styles.strengthBar} ${styles.selectedOption}`
+                                        : `${styles.strengthBar} ${styles.unselectedOption}`
+                                }
+                            ></div>
+                        </div>
+                    </div>
                     <button
-                        className="submit-button"
+                        className={styles.submitButton}
                         onClick={() => handleSubmit()}
                     >
                         GENERATE
                     </button>
                 </div>
             </div>
-            {/* <ToastContainer position="top-center" icon={false} draggablePercent={60} autoClose={1000} closeOnClick pauseOnFocusLoss pauseOnHover theme="dark" /> */}
-            <div>
-                <div className="password-box-container">
-                    <PasswordBox
-                        password={recents.recent1}
-                        handleCopy={handleCopy}
-                    />
-                </div>
-                <div className="password-box-container">
-                    <PasswordBox
-                        password={recents.recent2}
-                        handleCopy={handleCopy}
-                    />
-                </div>
-                <div className="password-box-container">
-                    <PasswordBox
-                        password={recents.recent3}
-                        handleCopy={handleCopy}
-                    />
-                </div>
+            <div className={styles.right}>
+                <div className={styles.rightTitle}>Recents</div>
+                {Object.values(recents).map((recent, index) => (
+                    <div
+                        key={index}
+                        className={styles.rightPasswordBoxContainer}
+                    >
+                        <PasswordBox
+                            password={recent}
+                            handleCopy={handleCopyToast}
+                        />
+                    </div>
+                ))}
             </div>
-        </>
+        </div>
     );
 }
 

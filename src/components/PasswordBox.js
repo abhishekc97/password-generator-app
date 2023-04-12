@@ -1,5 +1,5 @@
 import React from "react";
-import "./PasswordBox.css";
+import styles from "./PasswordBox.module.css";
 
 function PasswordBox(props) {
     const password = props.password;
@@ -11,11 +11,14 @@ function PasswordBox(props) {
 
     return (
         <>
-            <div className="password-box">
-                <div className="password-text"> {password} </div>
+            <div className={styles.passwordBox}>
+                <div className={styles.passwordText}> {password} </div>
             </div>
-            <div className="clipboard">
-                <button className="clipboard-image" onClick={handlePasswordCopy}></button>
+            <div className={styles.clipboard}>
+                <button
+                    className={styles.clipboardImage}
+                    onClick={handlePasswordCopy}
+                ></button>
             </div>
         </>
     );
